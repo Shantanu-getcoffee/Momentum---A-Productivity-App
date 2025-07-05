@@ -18,6 +18,7 @@ public class MomentumPOJO {
     private String username;
     private String email;
     private String password;
+    private Integer coins = 0;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;

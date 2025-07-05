@@ -47,6 +47,11 @@ public class TaskController {
         return ResponseEntity.ok(updatedTask);
     }
 
+    @PostMapping("/task/{id}/complete")
+    public ResponseEntity<String> completeTask(@PathVariable int id) {
+        String msg = taskService.completeTaskAndReward(id);
+        return ResponseEntity.ok(msg);
+    }
 
 
 }

@@ -108,6 +108,21 @@ public class TaskService {
         );
     }
 
+    public String completeTaskAndReward(int taskId) {
+        Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
+
+        if (!task.getIsCompleted()) {
+            task.setIsCompleted(true);
+            MomentumPOJO user = task.getUser();
+            user.setCoins(user.getCoins() + 10); // e.g., 10 coins per task
+            taskRepo.save(task);
+            momentumRepo.save(user);
+            return "Task completed! 10 coins awarded.";
+        } else {
+            return "Task was already completed.";
+        }
+    }
+
 }
 
 
