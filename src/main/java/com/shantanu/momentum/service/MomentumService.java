@@ -1,5 +1,6 @@
 package com.shantanu.momentum.service;
 
+import com.shantanu.momentum.DTO.CoinsDTO;
 import com.shantanu.momentum.model.MomentumPOJO;
 import com.shantanu.momentum.repo.MomentumRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,12 @@ public class MomentumService {
         } else {
             return user.getPassword().equals(password);
         }
+    }
+
+    public CoinsDTO getUserCoins(String username) {
+        MomentumPOJO user = repo.findById(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return new CoinsDTO(user.getCoins());
     }
 }

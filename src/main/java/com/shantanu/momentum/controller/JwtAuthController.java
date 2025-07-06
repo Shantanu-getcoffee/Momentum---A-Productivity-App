@@ -1,7 +1,9 @@
 package com.shantanu.momentum.controller;
 
+import com.shantanu.momentum.DTO.CoinsDTO;
 import com.shantanu.momentum.model.MomentumPOJO;
 //import com.shantanu.momentum.service.JwtService;
+import com.shantanu.momentum.repo.MomentumRepo;
 import com.shantanu.momentum.service.MomentumService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class JwtAuthController {
 
 //    @Autowired
 //    private JwtService jwtService;
+
+    @Autowired
+    private MomentumRepo momentumRepo;
 
     @Autowired
     private MomentumService momentumService;
@@ -39,6 +44,12 @@ public class JwtAuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("error", "Invalid username or password"));
         }
+    }
+
+    @GetMapping("/coins/{username}")
+    public ResponseEntity<CoinsDTO> getCoins(@PathVariable String username) {
+        CoinsDTO coinsDTO = momentumService.getUserCoins(username);
+        return ResponseEntity.ok(coinsDTO);
     }
 
 //    @PostMapping("/verify")
