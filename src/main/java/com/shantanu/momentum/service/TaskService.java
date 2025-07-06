@@ -6,6 +6,7 @@ import com.shantanu.momentum.model.MomentumPOJO;
 import com.shantanu.momentum.model.Task;
 import com.shantanu.momentum.repo.MomentumRepo;
 import com.shantanu.momentum.repo.TaskRepo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,9 @@ public class TaskService {
 
 
     public List<TaskDTO> getAllTasks() {
+
+
+
         return taskRepo.findAll().stream().map(task -> new TaskDTO(
                 task.getId(),
                 task.getTitle(),
@@ -84,7 +88,8 @@ public class TaskService {
     public TaskDTO createTask(TaskDTO dto) {
         // Fetch the user (MomentumPOJO) using the username
         MomentumPOJO user = momentumRepo.findById(dto.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User with username " + dto.getUsername() + " not found"));
+
 
         // Create and populate Task entity
         Task task = new Task();

@@ -19,6 +19,10 @@ public class Story {
 
     private String caption; // optional extra text
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String image; // Base64 image string
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
