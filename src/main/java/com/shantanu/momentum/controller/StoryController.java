@@ -1,5 +1,6 @@
 package com.shantanu.momentum.controller;
 
+import com.shantanu.momentum.DTO.StoryDTO;
 import com.shantanu.momentum.model.Story;
 import com.shantanu.momentum.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ public class StoryController {
     @Autowired
     private StoryService storyService;
 
-    @PostMapping("/post/{taskId}")
-    public ResponseEntity<String> postStory(@PathVariable int taskId) {
-        return ResponseEntity.ok(storyService.postStory(taskId));
+    @PostMapping("/post")
+    public ResponseEntity<StoryDTO> postStory(@RequestBody StoryDTO storyDTO) {
+        StoryDTO createdStory = storyService.createStory(storyDTO);
+        return ResponseEntity.ok(createdStory);
     }
 
     @GetMapping("/active")
-    public ResponseEntity<List<Story>> getStories() {
+    public ResponseEntity<List<StoryDTO>> getStories() {
         return ResponseEntity.ok(storyService.getActiveStories());
     }
 }

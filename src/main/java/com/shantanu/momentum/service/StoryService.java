@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StoryService {
@@ -48,9 +49,19 @@ public class StoryService {
     }
 
 
-    public List<Story> getActiveStories() {
-        long cutoff = System.currentTimeMillis() - (24 * 60 * 60 * 1000); // 24 hours in ms
-        return storyRepo.findActiveStories(cutoff);
+    public List<StoryDTO> getActiveStories() {
+        long cutoff = System.currentTimeMillis() - (24 * 60 * 60 * 1000);
+        List<Story> stories = storyRepo.findActiveStories(cutoff);
+
+        return stories.stream().map(story -> new StoryDTO(
+                story.getId(),
+                story.getCaption(),
+                story.getImage(),
+                story.getCreatedAt(),
+                story.getTask().getId(),
+                story.getUser().getUsername()
+        )).collect(Collectors.toList());
     }
+
 }
 
