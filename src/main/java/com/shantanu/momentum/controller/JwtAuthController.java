@@ -48,6 +48,7 @@ public class JwtAuthController {
 
     @GetMapping("/coins/{username}")
     public ResponseEntity<CoinsDTO> getCoins(@PathVariable String username) {
+        System.out.println(momentumRepo.findByUsername(username).getCoins());
         CoinsDTO coinsDTO = momentumService.getUserCoins(username);
         return ResponseEntity.ok(coinsDTO);
     }
