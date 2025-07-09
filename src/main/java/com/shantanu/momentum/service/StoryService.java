@@ -38,14 +38,15 @@ public class StoryService {
 
         Story saved = storyRepo.save(story);
 
-        return new StoryDTO(
-                saved.getId(),
-                saved.getCaption(),
-                saved.getImage(),
-                saved.getCreatedAt(),
-                saved.getTask().getId(),
-                saved.getUser().getUsername()
-        );
+        StoryDTO responseDTO = new StoryDTO();
+        responseDTO.setId(saved.getId());
+        responseDTO.setCaption(saved.getCaption());
+        responseDTO.setImage(saved.getImage());
+        responseDTO.setCreatedAt(saved.getCreatedAt());
+        responseDTO.setTaskId(saved.getTask().getId());
+        responseDTO.setUsername(saved.getUser().getUsername());
+
+        return responseDTO;
     }
 
 
