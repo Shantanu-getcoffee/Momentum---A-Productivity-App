@@ -13,5 +13,7 @@ public class StoryDTO {
     private String image; // Base64-encoded string
     private Long createdAt;
     private int taskId;
+    private String title;
+    private String description;
     private String username;
 }

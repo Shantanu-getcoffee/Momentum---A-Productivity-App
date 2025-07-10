@@ -44,6 +44,8 @@ public class StoryService {
         responseDTO.setImage(saved.getImage());
         responseDTO.setCreatedAt(saved.getCreatedAt());
         responseDTO.setTaskId(saved.getTask().getId());
+        responseDTO.setTitle(saved.getTask().getTitle());
+        responseDTO.setDescription(saved.getTask().getDescription());
         responseDTO.setUsername(saved.getUser().getUsername());
 
         return responseDTO;
@@ -60,6 +62,8 @@ public class StoryService {
                 story.getImage(),
                 story.getCreatedAt(),
                 story.getTask().getId(),
+                story.getTask().getTitle(),
+                story.getTask().getDescription(),
                 story.getUser().getUsername()
         )).collect(Collectors.toList());
     }
