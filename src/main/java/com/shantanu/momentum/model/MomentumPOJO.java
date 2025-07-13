@@ -23,10 +23,10 @@ public class MomentumPOJO {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Friendship> sentFriendRequests;
-//
-//    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
-//    private List<Friendship> receivedFriendRequests;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Friendship> sentFriendRequests;
+
+    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
+    private List<Friendship> receivedFriendRequests;
 
 }

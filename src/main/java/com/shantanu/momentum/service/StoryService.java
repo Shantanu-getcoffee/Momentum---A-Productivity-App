@@ -55,6 +55,14 @@ public class StoryService {
     public List<StoryDTO> getActiveStories() {
         long cutoff = System.currentTimeMillis() - (24 * 60 * 60 * 1000);
         List<Story> stories = storyRepo.findActiveStories(cutoff);
+        for (Story story : stories) {
+            if (story.getImage() != null) {
+                System.out.println("Image base64 length for story ID " + story.getId() + ": " + story.getImage().length());
+            } else {
+                System.out.println("Image is null for story ID " + story.getId());
+            }
+        }
+
 
         return stories.stream().map(story -> new StoryDTO(
                 story.getId(),

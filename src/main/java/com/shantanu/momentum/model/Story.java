@@ -19,7 +19,7 @@ public class Story {
 
     private String caption; // optional extra text
 
-    @Lob
+
     @Column(columnDefinition = "TEXT")
     private String image; // Base64 image string
 
