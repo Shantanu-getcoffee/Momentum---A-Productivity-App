@@ -26,5 +26,15 @@ public class PostController {
         List<PostDTO> posts = postService.getAllPosts();
         return ResponseEntity.ok(posts);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable Integer id) {
+        boolean deleted = postService.deletePostById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Post deleted successfully.");
+        } else {
+            return ResponseEntity.status(404).body("Post not found.");
+        }
+    }
 }
 

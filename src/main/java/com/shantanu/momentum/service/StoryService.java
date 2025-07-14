@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,6 +75,15 @@ public class StoryService {
                 story.getTask().getDescription(),
                 story.getUser().getUsername()
         )).collect(Collectors.toList());
+    }
+
+    public boolean deleteStoryById(Long id) {
+        Optional<Story> storyOptional = storyRepo.findById(id);
+        if (storyOptional.isPresent()) {
+            storyRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

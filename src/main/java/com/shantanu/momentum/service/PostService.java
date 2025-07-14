@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,5 +63,13 @@ public class PostService {
         )).collect(Collectors.toList());
     }
 
+    public boolean deletePostById(Integer id) {
+        Optional<Post> postOptional = postRepo.findById(id);
+        if (postOptional.isPresent()) {
+            postRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
 

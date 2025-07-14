@@ -26,5 +26,15 @@ public class StoryController {
     public ResponseEntity<List<StoryDTO>> getStories() {
         return ResponseEntity.ok(storyService.getActiveStories());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteStory(@PathVariable Long id) {
+        boolean deleted = storyService.deleteStoryById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Story deleted successfully.");
+        } else {
+            return ResponseEntity.status(404).body("Story not found.");
+        }
+    }
 }
 
