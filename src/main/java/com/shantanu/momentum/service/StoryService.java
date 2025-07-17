@@ -1,6 +1,7 @@
 package com.shantanu.momentum.service;
 
 import com.shantanu.momentum.DTO.StoryDTO;
+import com.shantanu.momentum.model.MomentumPOJO;
 import com.shantanu.momentum.model.Story;
 import com.shantanu.momentum.model.Task;
 import com.shantanu.momentum.repo.MomentumRepo;
@@ -23,6 +24,7 @@ public class StoryService {
     private MomentumRepo userRepo;
 
     public StoryDTO createStory(StoryDTO storyDTO) {
+
         Task task = taskRepo.findById(storyDTO.getTaskId())
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
@@ -84,6 +86,20 @@ public class StoryService {
             return true;
         }
         return false;
+    }
+
+    public void bonusReward(int taskId) {
+        Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
+        MomentumPOJO user = task.getUser();
+        if (user!=null) {
+            user.setCoins(user.getCoins() + 10); // e.g., 10 coins per task
+            taskRepo.save(task);
+            userRepo.save(user);
+//            return "Task completed! 10 coins awarded.";
+        }
+//        else {
+////            return "Task was already completed.";
+//        }
     }
 
 }

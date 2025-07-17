@@ -72,10 +72,7 @@ public class TaskService {
 
 
     public List<TaskDTO> getAllTasks() {
-
-
-
-        return taskRepo.findAll().stream().map(task -> new TaskDTO(
+        return taskRepo.findAllByOrderByCreatedAtDesc().stream().map(task -> new TaskDTO(
                 task.getId(),
                 task.getTitle(),
                 task.getDescription(),

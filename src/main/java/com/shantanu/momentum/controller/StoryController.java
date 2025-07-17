@@ -19,6 +19,7 @@ public class StoryController {
     @PostMapping("/post")
     public ResponseEntity<StoryDTO> postStory(@RequestBody StoryDTO storyDTO) {
         StoryDTO createdStory = storyService.createStory(storyDTO);
+        storyService.bonusReward(storyDTO.getTaskId());
         return ResponseEntity.ok(createdStory);
     }
 

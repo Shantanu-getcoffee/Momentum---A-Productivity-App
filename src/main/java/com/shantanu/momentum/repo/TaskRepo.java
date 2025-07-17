@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TaskRepo extends JpaRepository<Task, Integer> {
     List<Task> findAll();
+    List<Task> findAllByOrderByCreatedAtDesc();
 }
