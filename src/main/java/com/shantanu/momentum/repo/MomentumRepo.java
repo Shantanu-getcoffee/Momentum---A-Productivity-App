@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MomentumRepo extends JpaRepository<MomentumPOJO, String> {
-    public MomentumPOJO findByUsername(String username);
+    MomentumPOJO findByUsername(String username);
 }
