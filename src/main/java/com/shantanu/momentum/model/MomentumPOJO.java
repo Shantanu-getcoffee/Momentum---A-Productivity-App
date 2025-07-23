@@ -20,6 +20,10 @@ public class MomentumPOJO {
     private String password;
     private Integer coins = 0;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String profilePictureBase64;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 

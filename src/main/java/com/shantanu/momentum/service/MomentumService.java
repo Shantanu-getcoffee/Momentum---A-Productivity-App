@@ -31,4 +31,18 @@ public class MomentumService {
 
         return new CoinsDTO(user.getCoins());
     }
+
+
+    public void updateProfilePicture(String username, String base64Image) {
+        MomentumPOJO user = repo.findById(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setProfilePictureBase64(base64Image);
+        repo.save(user);
+    }
+
+    public String getProfilePicture(String username) {
+        MomentumPOJO user = repo.findById(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getProfilePictureBase64();
+    }
 }
