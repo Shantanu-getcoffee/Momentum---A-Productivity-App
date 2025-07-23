@@ -66,4 +66,10 @@ public class JwtAuthController {
         String username = valid ? jwtService.getUsername(token) : null;
         return ResponseEntity.ok(Map.of("valid", valid, "username", username));
     }
+
+    @PostMapping("/{username}/profile-picture")
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable String username, @RequestBody String base64Image) {
+        momentumService.updateProfilePicture(username, base64Image);
+        return ResponseEntity.ok("Profile picture updated successfully");
+    }
 }
